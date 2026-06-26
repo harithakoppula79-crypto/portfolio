@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haritha Koppula — Python Engineer, Automation & Data Pipelines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c1014;
+  --panel:#12171c;
+  --panel-line:#1f2730;
+  --text:#e7edf1;
+  --muted:#7f8c96;
+  --amber:#ffb648;
+  --green:#4ade80;
+  --red:#fb6a6a;
+  --display:'Space Grotesk', sans-serif;
+  --mono:'IBM Plex Mono', monospace;
+  --body:'Inter', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--body);
+  line-height:1.5;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+}
+
+/* ---------- NAV ---------- */
+nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(12,16,20,0.85);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--panel-line);
+}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;}
+.logo{font-family:var(--mono);font-size:14px;font-weight:600;letter-spacing:0.5px;display:flex;align-items:center;gap:8px;}
+.logo .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+.navlinks{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter-spacing:0.5px;color:var(--muted);}
+.navlinks a:hover{color:var(--amber);}
+.navlinks span{color:var(--panel-line);}
+@media (max-width:640px){.navlinks{display:none;}}
+
+/* ---------- HERO ---------- */
+.hero{padding:72px 0 64px;border-bottom:1px solid var(--panel-line);}
+.eyebrow{
+  font-family:var(--mono);font-size:12px;color:var(--green);
+  letter-spacing:1.5px;text-transform:uppercase;
+  display:flex;align-items:center;gap:10px;margin-bottom:22px;
+}
+.eyebrow::before{content:"●";font-size:9px;animation:pulse 2s infinite;}
+.hero h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(40px,7vw,72px);
+  line-height:1.03;
+  letter-spacing:-0.02em;
+}
+.hero h1 .accent{color:var(--amber);}
+.hero .role{
+  font-family:var(--mono);font-size:16px;color:var(--muted);
+  margin-top:18px;max-width:560px;
+}
+.hero-grid{
+  display:grid;grid-template-columns:1.1fr 1fr;gap:48px;
+  margin-top:46px;align-items:start;
+}
+@media (max-width:860px){.hero-grid{grid-template-columns:1fr;}}
+
+.hero-copy p{color:#b9c2c9;font-size:15.5px;max-width:480px;margin-bottom:24px;}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+.btn{
+  font-family:var(--mono);font-size:13px;padding:12px 20px;
+  border:1px solid var(--panel-line);border-radius:6px;
+  transition:all .2s ease;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary{background:var(--amber);color:#16110a;border-color:var(--amber);font-weight:600;}
+.btn-primary:hover{background:#ffc56b;}
+.btn-ghost:hover{border-color:var(--amber);color:var(--amber);}
+
+/* terminal */
+.terminal{
+  background:var(--panel);
+  border:1px solid var(--panel-line);
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
+}
+.term-bar{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 14px;border-bottom:1px solid var(--panel-line);
+  background:#10151a;
+}
+.term-bar .tdot{width:9px;height:9px;border-radius:50%;}
+.term-title{
+  font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:8px;
+}
+.term-body{
+  padding:18px 16px;font-family:var(--mono);font-size:12.5px;
+  min-height:240px;color:#c4cdd3;
+}
+.term-body .line{margin-bottom:7px;display:flex;gap:8px;white-space:pre-wrap;}
+.term-body .ts{color:#566069;flex-shrink:0;}
+.tag{font-weight:600;flex-shrink:0;}
+.tag.ok{color:var(--green);}
+.tag.warn{color:var(--amber);}
+.tag.info{color:#6aa9ff;}
+.cursor{display:inline-block;width:7px;height:14px;background:var(--green);animation:blink 1s steps(1) infinite;vertical-align:middle;}
+@keyframes blink{50%{opacity:0;}}
+
+/* ---------- SECTION SHELL ---------- */
+section{padding:80px 0;border-bottom:1px solid var(--panel-line);}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:40px;}
+.sec-num{font-family:var(--mono);font-size:12px;color:var(--amber);}
+.sec-head h2{font-family:var(--display);font-size:clamp(26px,3.5vw,36px);font-weight:600;letter-spacing:-0.01em;}
+.sec-sub{color:var(--muted);font-size:14px;max-width:520px;margin-top:-26px;margin-bottom:36px;}
+
+/* ---------- ABOUT ---------- */
+.about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;}
+@media (max-width:860px){.about-grid{grid-template-columns:1fr;}}
+.about-grid p{color:#b9c2c9;font-size:16px;margin-bottom:18px;}
+.facts{background:var(--panel);border:1px solid var(--panel-line);border-radius:10px;padding:22px;}
+.facts dt{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-top:16px;}
+.facts dt:first-child{margin-top:0;}
+.facts dd{font-size:14.5px;margin-top:4px;}
+.chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+.chip{font-family:var(--mono);font-size:11px;background:#1a2128;border:1px solid var(--panel-line);padding:4px 9px;border-radius:5px;color:#cdd6db;}
+
+/* ---------- PIPELINE / PROJECT ---------- */
+.flow{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:44px;
+}
+@media (max-width:860px){.flow{grid-template-columns:1fr;}}
+.flow-step{
+  background:var(--panel);border:1px solid var(--panel-line);border-radius:8px;
+  padding:16px 14px;position:relative;
+}
+.flow-step .fnum{font-family:var(--mono);font-size:10px;color:var(--amber);}
+.flow-step h4{font-family:var(--display);font-size:14.5px;margin:8px 0 4px;font-weight:600;}
+.flow-step p{font-size:12px;color:var(--muted);}
+.flow-arrow{
+  display:none;
+}
+@media (min-width:861px){
+  .flow{position:relative;}
+  .flow-step:not(:last-child)::after{
+    content:"→";position:absolute;right:-18px;top:50%;transform:translateY(-50%);
+    color:var(--panel-line);font-size:18px;z-index:2;
+  }
+}
+
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:40px;}
+@media (max-width:760px){.metrics{grid-template-columns:repeat(2,1fr);}}
+.metric{background:var(--panel);border:1px solid var(--panel-line);border-radius:8px;padding:20px 16px;}
+.metric .num{font-family:var(--display);font-size:32px;font-weight:700;color:var(--amber);}
+.metric .lbl{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:6px;}
+
+.stack-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;}
+.proj-bullets{list-style:none;}
+.proj-bullets li{
+  display:flex;gap:10px;font-size:14.5px;color:#c4cdd3;margin-bottom:11px;padding-left:0;
+}
+.proj-bullets li::before{content:"›";color:var(--green);font-family:var(--mono);font-weight:700;}
+
+/* ---------- SKILLS ---------- */
+.skill-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+@media (max-width:760px){.skill-grid{grid-template-columns:1fr;}}
+.skill-card{background:var(--panel);border:1px solid var(--panel-line);border-radius:8px;padding:18px 18px;}
+.skill-card .shead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.skill-card h4{font-family:var(--mono);font-size:12px;letter-spacing:0.5px;text-transform:uppercase;color:var(--muted);}
+.status-pill{font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:10px;}
+.status-pill.live{background:rgba(74,222,128,0.12);color:var(--green);}
+.status-pill.building{background:rgba(255,182,72,0.12);color:var(--amber);}
+
+/* ---------- EDUCATION ---------- */
+.timeline{border-left:1px solid var(--panel-line);margin-left:6px;padding-left:28px;}
+.t-item{position:relative;margin-bottom:36px;}
+.t-item:last-child{margin-bottom:0;}
+.t-item::before{
+  content:"";position:absolute;left:-33px;top:4px;width:11px;height:11px;
+  border-radius:50%;background:var(--bg);border:2px solid var(--amber);
+}
+.t-item .tdate{font-family:var(--mono);font-size:11px;color:var(--muted);}
+.t-item h4{font-family:var(--display);font-size:17px;font-weight:600;margin:5px 0 3px;}
+.t-item p{font-size:13.5px;color:var(--muted);}
+
+/* ---------- CERTS ---------- */
+.cert-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+@media (max-width:760px){.cert-list{grid-template-columns:1fr;}}
+.cert{
+  background:var(--panel);border:1px solid var(--panel-line);border-radius:8px;
+  padding:15px 16px;font-size:13.5px;color:#c4cdd3;display:flex;gap:10px;align-items:flex-start;
+}
+.cert .ck{color:var(--green);font-family:var(--mono);flex-shrink:0;}
+
+/* ---------- CONTACT / FOOTER ---------- */
+footer{padding:80px 0 50px;}
+.contact-grid{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:32px;}
+footer h2{font-family:var(--display);font-size:clamp(30px,5vw,48px);font-weight:700;max-width:520px;line-height:1.1;}
+.contact-list{display:flex;flex-direction:column;gap:10px;font-family:var(--mono);font-size:14px;}
+.contact-list a{color:var(--text);border-bottom:1px solid transparent;}
+.contact-list a:hover{color:var(--amber);border-color:var(--amber);}
+.fine{margin-top:60px;display:flex;justify-content:space-between;color:var(--muted);font-family:var(--mono);font-size:11px;flex-wrap:wrap;gap:10px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo"><span class="dot"></span> HARITHA.KOPPULA</div>
+    <div class="navlinks">
+      <a href="#about">about</a><span>/</span>
+      <a href="#work">work</a><span>/</span>
+      <a href="#skills">skills</a><span>/</span>
+      <a href="#education">education</a><span>/</span>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">system status — online</div>
+    <h1>Haritha Koppula<br>builds pipelines that <span class="accent">don't need watching.</span></h1>
+    <p class="role">Python Engineer — Automation &amp; Data Pipelines · Kurnool, India</p>
+
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p>Computer Science (AI) undergraduate who turns manual, error-prone reporting into automated systems — log collection, parsing, alerting, and dashboards that run themselves. Currently extending that same rigor into machine learning and cloud.</p>
+        <div class="cta-row">
+          <a href="#work" class="btn btn-primary">View the pipeline →</a>
+          <a href="#contact" class="btn btn-ghost">Get in touch</a>
+        </div>
+      </div>
+
+      <div class="terminal">
+        <div class="term-bar">
+          <div class="tdot" style="background:#fb6a6a"></div>
+          <div class="tdot" style="background:#ffb648"></div>
+          <div class="tdot" style="background:#4ade80"></div>
+          <span class="term-title">log_pipeline.monitor — bash</span>
+        </div>
+        <div class="term-body" id="termBody"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">01</span><h2>About</h2></div>
+    <div class="about-grid">
+      <div>
+        <p>I'm a fourth-year Computer Science &amp; Engineering (Artificial Intelligence) student at Ashoka Women's Engineering College, most at home when I'm pointing Python at a messy, real-world problem — a folder of unparsed logs, a report someone's been building by hand every week, an alert that should already exist but doesn't.</p>
+        <p>My main project automates log collection and reporting across 15+ servers: parsing with regex and Pandas, scheduling with cron, alerting on thresholds, and surfacing everything in Grafana and Power BI so stakeholders stop asking "what's the status?" and just look. I'm currently adding machine learning, NumPy, generative AI concepts, and cloud platforms (GCP/AWS) to that toolkit.</p>
+      </div>
+      <div class="facts">
+        <dl>
+          <dt>Based in</dt><dd>Kurnool, Andhra Pradesh, India</dd>
+          <dt>Studying</dt><dd>B.Tech CSE (AI), Ashoka Women's Engineering College — CGPA 8.02</dd>
+          <dt>Languages spoken</dt><dd>
+            <div class="chip-row"><span class="chip">English</span><span class="chip">Telugu</span></div>
+          </dd>
+          <dt>Currently building</dt><dd>
+            <div class="chip-row"><span class="chip">ML fundamentals</span><span class="chip">NumPy</span><span class="chip">Generative AI</span><span class="chip">GCP / AWS</span></div>
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Featured work</h2></div>
+    <p class="sec-sub">Log Pipeline Automation — an independent project turning scattered server logs into self-service metrics. 2026 – Present.</p>
+
+    <div class="flow">
+      <div class="flow-step"><div class="fnum">01 · collect</div><h4>15+ servers</h4><p>Python scripts pull raw logs across the fleet on a schedule.</p></div>
+      <div class="flow-step"><div class="fnum">02 · parse</div><h4>Regex + Pandas</h4><p>10,000+ entries structured into clean, queryable records.</p></div>
+      <div class="flow-step"><div class="fnum">03 · store</div><h4>SQL + CSV</h4><p>Structured exports feed recurring reports automatically.</p></div>
+      <div class="flow-step"><div class="fnum">04 · alert</div><h4>Cron thresholds</h4><p>Critical errors trigger alerts without anyone watching a screen.</p></div>
+      <div class="flow-step"><div class="fnum">05 · visualize</div><h4>Grafana + Power BI</h4><p>Stakeholders get real-time dashboards instead of status pings.</p></div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric"><div class="num">90%</div><div class="lbl">less manual effort</div></div>
+      <div class="metric"><div class="num">2hr → 5min</div><div class="lbl">report turnaround</div></div>
+      <div class="metric"><div class="num">45%</div><div class="lbl">faster incident response</div></div>
+      <div class="metric"><div class="num">10,000+</div><div class="lbl">log entries processed</div></div>
+    </div>
+
+    <div class="stack-row">
+      <span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">SQL</span><span class="chip">Regex</span><span class="chip">Linux / Bash</span><span class="chip">Cron</span><span class="chip">Power BI</span><span class="chip">Grafana</span>
+    </div>
+
+    <ul class="proj-bullets">
+      <li>Automated log collection and parsing across 15+ servers, reducing manual effort by 90%.</li>
+      <li>Automated daily and weekly performance reports with cron jobs and SQL, cutting turnaround from 2 hours to 5 minutes.</li>
+      <li>Built threshold-based alerting for critical errors, improving incident response time by 45%.</li>
+      <li>Processed 10,000+ log entries with Pandas into structured CSV exports for recurring reporting.</li>
+      <li>Automated repetitive file I/O tasks, cutting manual log review time by 80%.</li>
+      <li>Connected processed logs to Grafana and Power BI dashboards for real-time, self-service access.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Skills</h2></div>
+    <div class="skill-grid">
+      <div class="skill-card">
+        <div class="shead"><h4>Programming</h4><span class="status-pill live">in use</span></div>
+        <div class="chip-row"><span class="chip">Python</span><span class="chip">C</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="shead"><h4>Data tools</h4><span class="status-pill live">in use</span></div>
+        <div class="chip-row"><span class="chip">Pandas</span><span class="chip">SQL</span><span class="chip">Regex</span><span class="chip">CSV / File I/O</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="shead"><h4>Systems &amp; environments</h4><span class="status-pill live">in use</span></div>
+        <div class="chip-row"><span class="chip">Linux / Bash</span><span class="chip">Cron</span><span class="chip">Git / GitHub</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="shead"><h4>Visualization &amp; monitoring</h4><span class="status-pill live">in use</span></div>
+        <div class="chip-row"><span class="chip">Power BI</span><span class="chip">Grafana</span></div>
+      </div>
+      <div class="skill-card" style="grid-column:1 / -1;">
+        <div class="shead"><h4>Currently building</h4><span class="status-pill building">in progress</span></div>
+        <div class="chip-row"><span class="chip">Machine Learning fundamentals</span><span class="chip">NumPy</span><span class="chip">Generative AI concepts</span><span class="chip">GCP</span><span class="chip">AWS</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Education</h2></div>
+    <div class="timeline">
+      <div class="t-item">
+        <div class="tdate">Aug 2023 — May 2027 · Fourth year</div>
+        <h4>B.Tech, Computer Science &amp; Engineering (Artificial Intelligence)</h4>
+        <p>Ashoka Women's Engineering College · CGPA 8.02</p>
+      </div>
+      <div class="t-item">
+        <div class="tdate">Apr 2021 — May 2023</div>
+        <h4>Board of Intermediate Education, MPC</h4>
+        <p>St. Joseph's Junior College · 77.3%</p>
+      </div>
+      <div class="t-item">
+        <div class="tdate">Apr 2020 — May 2021</div>
+        <h4>SSC (10th Grade)</h4>
+        <p>Sri Sarada Vidyanikethan High School · 97.1%</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Certifications</h2></div>
+    <div class="cert-list">
+      <div class="cert"><span class="ck">✓</span> AI Skills Passport — EY &amp; Microsoft</div>
+      <div class="cert"><span class="ck">✓</span> Introduction to Database Systems — IIT (Jan–Apr 2025)</div>
+      <div class="cert"><span class="ck">✓</span> English Language for Competitive Exams — IIT (Jul–Oct 2025)</div>
+      <div class="cert"><span class="ck">✓</span> Renewable Energy Engineering: Solar, Wind &amp; Biomass Energy Systems — IIT (Jan–Apr 2026)</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <h2>Have logs that need taming, or a pipeline worth building? Let's talk.</h2>
+      <div class="contact-list">
+        <a href="mailto:harithakoppula79@gmail.com">harithakoppula79@gmail.com</a>
+        <a href="tel:+916304747534">+91 63047 47534</a>
+        <a href="https://linkedin.com/in/haritha-koppula" target="_blank" rel="noopener">linkedin.com/in/haritha-koppula</a>
+        <span style="color:var(--muted)">Kurnool, India</span>
+      </div>
+    </div>
+    <div class="fine">
+      <span>© 2026 Haritha Koppula</span>
+      <span>build: automation · data pipelines · ai</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const logLines = [
+  { ts: "06:00:01", tag: "INFO", cls: "info", msg: "connecting to 15 servers..." },
+  { ts: "06:00:02", tag: "OK", cls: "ok", msg: "log collection complete — 10,482 entries" },
+  { ts: "06:00:04", tag: "INFO", cls: "info", msg: "parsing with regex + pandas..." },
+  { ts: "06:00:06", tag: "OK", cls: "ok", msg: "structured export written to report.csv" },
+  { ts: "06:00:07", tag: "WARN", cls: "warn", msg: "error rate above threshold on srv-07" },
+  { ts: "06:00:07", tag: "OK", cls: "ok", msg: "alert sent — response time improved 45%" },
+  { ts: "06:00:09", tag: "INFO", cls: "info", msg: "pushing metrics to grafana + power bi" },
+  { ts: "06:00:10", tag: "OK", cls: "ok", msg: "manual effort reduced by 90%. report ready in 5m." },
+];
+
+const termBody = document.getElementById('termBody');
+let lineIdx = 0;
+
+function typeLine(line, container, done){
+  const row = document.createElement('div');
+  row.className = 'line';
+  const ts = document.createElement('span');
+  ts.className = 'ts';
+  ts.textContent = line.ts;
+  const tag = document.createElement('span');
+  tag.className = 'tag ' + line.cls;
+  tag.textContent = '[' + line.tag + ']';
+  const msgSpan = document.createElement('span');
+  row.appendChild(ts);
+  row.appendChild(tag);
+  row.appendChild(msgSpan);
+  container.appendChild(row);
+
+  let i = 0;
+  const speed = 14;
+  function step(){
+    if(i <= line.msg.length){
+      msgSpan.textContent = line.msg.slice(0, i);
+      i++;
+      setTimeout(step, speed);
+    } else {
+      done();
+    }
+  }
+  step();
+}
+
+function runSequence(){
+  termBody.innerHTML = '';
+  lineIdx = 0;
+  function next(){
+    if(lineIdx < logLines.length){
+      typeLine(logLines[lineIdx], termBody, () => {
+        lineIdx++;
+        setTimeout(next, 280);
+      });
+    } else {
+      const cur = document.createElement('span');
+      cur.className = 'cursor';
+      termBody.appendChild(cur);
+      setTimeout(runSequence, 4500);
+    }
+  }
+  next();
+}
+
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  logLines.forEach(line => {
+    const row = document.createElement('div');
+    row.className = 'line';
+    row.innerHTML = `<span class="ts">${line.ts}</span><span class="tag ${line.cls}">[${line.tag}]</span><span>${line.msg}</span>`;
+    termBody.appendChild(row);
+  });
+} else {
+  runSequence();
+}
+</script>
+
+</body>
+</html>
